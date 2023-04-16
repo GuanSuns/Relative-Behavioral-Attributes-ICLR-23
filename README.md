@@ -4,6 +4,10 @@
 
 **Note**: The code has been refactored for better readability. If you encounter any problem, feel free to email lguan9@asu.edu.
 
+<p align="center">
+  <img src="doc/overview.gif" alt="overview"/>
+</p>
+
 
 ## Instructions
 
