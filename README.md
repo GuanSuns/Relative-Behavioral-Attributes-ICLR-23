@@ -7,7 +7,7 @@
 
 ## Instructions
 
-#### Step 1. Constructing the behavior corpora
+### Step 1. Constructing the behavior corpora
 
 - As mentioned in the paper, ideally, the offline behavior datasets should be some publicly accessible behavior corpora like the Waymo Open Dataset. However, the primary focus of the paper is to assess the feasibility of the two proposed approaches, and therefore synthetic data was used instead.
 
@@ -30,13 +30,13 @@
   
 
 
-#### Step 2. Learning the image-state encoder (only for Lane-Change)
+### Step 2. Learning the image-state encoder (only for Lane-Change)
 - Example script: `scripts/lane_change/vae_encoder.bash`.
 - In the cfg file (see the `vae_encoder.bash` file for example), you will need to set the path to the behavior dataset `dataset_dir: xxxxx`.
 
 
 
-#### Step 3. Learning the attribute reward function
+### Step 3. Learning the attribute reward function
 - All the training scripts can be found under the `scripts` directory.
 - **RBA-Global (Method 1)**
   - The first step is to learn an attribute function. For example, when language embedding is used as attribute representation, to learn the attribute function for Lane-Change, the script to use should be `scripts/lane_change/language/method_1_attr.bash`.
@@ -51,7 +51,7 @@
   
 
 
-#### Step 4. Interacting with end users
+### Step 4. Interacting with end users
 
 - We provide example user interfaces that demonstrate the use of pretrained reward functions. The scripts are under the `human_interact` directory. In each of the script, you can set the target attribute strength in the dict `target_attrs`. You can also set the control precision by changing the value of `epsilon` in `target_attrs` (recall that we consider a trial as a successful one if the difference between the agent’s behavior and the target behavior is lower than a threshold). As discussed in the paper, the current approaches still struggle to achieve high-precision control, suggesting that further research is needed.
 - For reference, the user-interface scripts load the pretrained reward functions under the `trained_models` directory.
