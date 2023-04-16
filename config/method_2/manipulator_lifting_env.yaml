@@ -1,0 +1,57 @@
+seed: null
+dataset_name: 'manipulator-lifting'
+dataset_dir: 'data/behavior_data/manipulator_lifting/'
+is_video_data: False   # whether the dataset is an image/video dataset
+frame_stack: 3
+image_size: 64
+
+# domain description
+domain_description_file: config/domain_description/manipulator_lifting_env.yaml
+
+# the information will be populated automatically
+attr_info: null
+
+# if needed, select subsets of the training/test data
+attr_training_subset: null
+attr_test_subset: null
+
+# config of encoder training (no encoder needed in this env)
+encoder_cfg: null
+
+# config of attribute function training
+reward_func:
+  expr_id: null
+  encoder_path: null
+  n_negative_training: 100    # num of negative samples for training
+  n_negative_test: 100    # num of negative samples for testing
+  two_direction: True   # used in method_2.data.Attribute_Data
+  reward_clip: 20
+  state_dim: 80
+  attr_dim: 2
+  hidden_dim: 512
+  anchor_hidden_dim: 128
+  anchor_emb_dim: 64
+
+  batch_size: 512      # training batch size
+  eval_batch_size: 512    # batch size for evaluation
+  max_batch_epoch: 440
+  n_epoch: 12    # num of training epochs
+  sampling_strategy: 'uniform'  # only support uniform selection for now
+  weight_decay: 1e-5
+  lr: 1e-4
+  sche: 'cosine'
+  # config of cosine scheduler
+  cosine_sche:
+    min_lr: 1e-5
+  # config of Step scheduler
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  # only for online training
+  online_training_sampling_strategy: 'uniform'
+
+  encoded_attributes: null
+
+
+
+

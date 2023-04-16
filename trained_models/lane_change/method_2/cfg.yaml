@@ -1,0 +1,100 @@
+seed: 4593
+dataset_name: lane-change
+dataset_dir: data/behavior_data/lane_change/
+is_video_data: true
+frame_stack: 3
+image_size: 64
+domain_description_file: config/domain_description/lane_change_env.yaml
+attr_info:
+  use_global_ranking: true
+  is_video_data: true
+  attributes:
+    sharpness:
+      key: tau_lateral
+      language_descriptions:
+      - sharpness of steering
+      id: 0
+      epsilon: 0.2
+      reverse: true
+      local_change_range:
+        lower: 0.9
+        upper: 1.1
+    vehicle_dist:
+      key: final_turning_dist
+      language_descriptions:
+      - distance to the following car when making lane change
+      id: 1
+      epsilon: 3.0
+      reverse: false
+      local_change_range:
+        lower: 0.9
+        upper: 1.1
+attr_training_subset: null
+attr_test_subset:
+  random_subset: 2000
+encoder_cfg:
+  expr_id: null
+  encoder_type: vae
+  lr: 0.0001
+  loss_recon: L2
+  batch_size: 128
+  eval_batch_size: 512
+  n_epoch: 150
+  cnn_output_dim: 512
+  hidden_dim: 512
+  z_dim: 128
+  weight_decay: 1.0e-05
+  weight_z: 0.1
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+reward_func:
+  expr_id: reward-func-lane-change_20220919_204939
+  encoder_path: trained_models/lane_change/vae_encoder/
+  n_negative_training: 100
+  n_negative_test: 100
+  two_direction: true
+  reward_clip: 20
+  state_dim: 128
+  attr_dim: 2
+  hidden_dim: 512
+  anchor_hidden_dim: 256
+  anchor_emb_dim: 128
+  batch_size: 512
+  eval_batch_size: 512
+  max_batch_epoch: 440
+  n_epoch: 12
+  sampling_strategy: uniform
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  online_training_sampling_strategy: uniform
+  encoded_attributes:
+    sharpness:
+      key: tau_lateral
+      language_descriptions:
+      - sharpness of steering
+      id: 0
+      epsilon: 0.2
+      reverse: true
+      local_change_range:
+        lower: 0.9
+        upper: 1.1
+    vehicle_dist:
+      key: final_turning_dist
+      language_descriptions:
+      - distance to the following car when making lane change
+      id: 1
+      epsilon: 3.0
+      reverse: false
+      local_change_range:
+        lower: 0.9
+        upper: 1.1

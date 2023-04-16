@@ -1,0 +1,105 @@
+seed: 1661
+dataset_name: walker-step
+dataset_dir: data/behavior_data/walker_step/
+is_video_data: false
+frame_stack: 3
+image_size: 64
+use_language_attr: true
+domain_description_file: config/domain_description/walker_step_env.yaml
+attr_info:
+  use_global_ranking: true
+  is_video_data: false
+  attributes:
+    step_size:
+      key: final_step_size
+      language_descriptions:
+      - the step size
+      id: 0
+      epsilon: 0.1
+      reverse: false
+      local_change_range:
+        lower: 1.0
+        upper: 1.1
+    softness:
+      key: softness_speed
+      language_descriptions:
+      - softness of the movement
+      id: 1
+      epsilon: 0.015
+      reverse: true
+      local_change_range:
+        lower: 1.0
+        upper: 1.1
+attr_training_subset: null
+attr_test_subset: null
+encoder_cfg: null
+attr_func:
+  expr_id: language-attr-func-walker-step_20220926_195136
+  encoder_path: null
+  n_ensemble: 1
+  reward_clip: 20
+  state_dim: 24
+  attr_dim: 768
+  hidden_dim: 1024
+  is_global_ranking: true
+  batch_size: 128
+  eval_batch_size: 128
+  n_epoch: 5
+  sampling_strategy: uniform
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  encoded_attributes:
+    step_size:
+      max: 18.66777992248535
+      min: -0.8353831768035889
+      ground_min: 0.11998900897908225
+      ground_max: 1.2591199050430817
+      key: final_step_size
+      language_descriptions:
+      - the step size
+      id: 0
+      epsilon: 0.1
+      reverse: false
+      local_change_range:
+        lower: 1.0
+        upper: 1.1
+    softness:
+      max: -0.7101773619651794
+      min: -13.595282554626465
+      ground_min: 0.033633231543276465
+      ground_max: 0.15837152416873368
+      key: softness_speed
+      language_descriptions:
+      - softness of the movement
+      id: 1
+      epsilon: 0.015
+      reverse: true
+      local_change_range:
+        lower: 1.0
+        upper: 1.1
+reward_func:
+  expr_id: null
+  attr_func_path: trained_models/walker_step/language/method_1/attr_func/
+  n_targets_per_pair: 50
+  n_targets_per_pair_eval: 2
+  n_epoch: 3
+  batch_size: 512
+  eval_batch_size: 512
+  reward_clip: 20
+  state_dim: 24
+  attr_dim: 768
+  hidden_dim: 1024
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5

@@ -1,0 +1,77 @@
+seed: null
+dataset_name: 'walker-step'
+dataset_dir: 'data/behavior_data/walker_step/'
+is_video_data: False   # whether the dataset is an image/video dataset
+frame_stack: 3
+image_size: 64
+
+# domain description
+domain_description_file: config/domain_description/walker_step_env.yaml
+
+# the information will be populated automatically
+attr_info: null
+
+# if needed, select subsets of the training/test data
+attr_training_subset: null
+attr_test_subset: null
+
+# config of encoder training (no encoder needed in this env)
+encoder_cfg: null
+
+# config of attribute function training
+attr_func:
+  expr_id: null
+  encoder_path: null
+  n_ensemble: 1
+  reward_clip: 20
+  state_dim: 24
+  attr_dim: 2
+  hidden_dim: 512
+
+  is_global_ranking: True
+  batch_size: 128      # training batch size
+  eval_batch_size: 128    # batch size for evaluation
+  n_epoch: 3    # num of training epochs
+  sampling_strategy: 'uniform'  # only support uniform selection for now
+  weight_decay: 1e-5
+  lr: 1e-4
+  sche: 'cosine'
+  # config of cosine scheduler
+  cosine_sche:
+    min_lr: 1e-5
+  # config of Step scheduler
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  # encoded attribute information (a dictionary, this will be populated automatically when the attr function is learned)
+  encoded_attributes: null
+
+# config of the attr-conditioned reward function
+reward_func:
+  expr_id: null
+  # the path to a pretrained attr function
+  attr_func_path: 'trained_models/walker_step/method_1/attr_func/'
+  n_targets_per_pair: 50   # see the Traj_Pref_Data class
+  n_targets_per_pair_eval: 2
+
+  n_epoch: 3    # num of training epochs
+  batch_size: 512      # training batch size
+  eval_batch_size: 512    # batch size for evaluation
+
+  reward_clip: 20
+  state_dim: 24
+  attr_dim: 2
+  hidden_dim: 512
+  weight_decay: 1e-5
+  lr: 1e-4
+  sche: 'cosine'
+  # config of cosine scheduler
+  cosine_sche:
+    min_lr: 1e-5
+  # config of Step scheduler
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+
+
+

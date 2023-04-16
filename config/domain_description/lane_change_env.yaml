@@ -1,0 +1,23 @@
+# attr information of the domain (for training/evaluation)
+attr_info:
+  use_global_ranking: True
+  is_video_data: True
+  attributes:
+    sharpness:
+      key: 'tau_lateral'  # the key for fetching related info in traj_meta
+      language_descriptions: ['sharpness of steering']
+      id: 0
+      epsilon: 0.2
+      reverse: True
+      local_change_range: # used by method 2
+        lower: 0.9
+        upper: 1.1
+    vehicle_dist:
+      key: 'final_turning_dist'
+      language_descriptions: ['distance to the following car when making lane change']
+      id: 1
+      epsilon: 3.0
+      reverse: False
+      local_change_range: # used by method 2
+        lower: 0.9
+        upper: 1.1

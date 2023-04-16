@@ -1,0 +1,71 @@
+seed: 114
+dataset_name: lane-change
+dataset_dir: data/behavior_data/lane_change/
+is_video_data: true
+frame_stack: 3
+image_size: 64
+domain_description_file: config/domain_description/lane_change_env.yaml
+attr_info: null
+attr_training_subset: null
+attr_test_subset: null
+encoder_cfg:
+  expr_id: behavior-encoder-lane-change_20220918_235612
+  encoder_type: vae
+  lr: 0.0001
+  loss_recon: L2
+  batch_size: 128
+  eval_batch_size: 512
+  n_epoch: 150
+  cnn_output_dim: 512
+  hidden_dim: 512
+  z_dim: 128
+  weight_decay: 1.0e-05
+  weight_z: 0.1
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+attr_func:
+  expr_id: null
+  encoder_path: trained_models/lane_change/vae_encoder/
+  n_ensemble: 1
+  reward_clip: 20
+  state_dim: 128
+  attr_dim: 2
+  hidden_dim: 512
+  is_global_ranking: true
+  batch_size: 128
+  eval_batch_size: 128
+  n_epoch: 6
+  sampling_strategy: uniform
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  encoded_attributes: null
+reward_func:
+  expr_id: null
+  attr_func_path: trained_models/lane_change/method_1/attr_func/
+  n_targets_per_pair: 50
+  n_targets_per_pair_eval: 2
+  n_epoch: 3
+  batch_size: 128
+  eval_batch_size: 128
+  reward_clip: 20
+  state_dim: 128
+  attr_dim: 2
+  hidden_dim: 512
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5

@@ -1,0 +1,72 @@
+seed: 5982
+dataset_name: manipulator-lifting
+dataset_dir: data/behavior_data/manipulator_lifting/
+is_video_data: false
+frame_stack: 3
+image_size: 64
+domain_description_file: config/domain_description/manipulator_lifting_env.yaml
+attr_info:
+  use_global_ranking: true
+  is_video_data: false
+  attributes:
+    hardness:
+      key: hardness
+      id: 0
+      epsilon: 0.055
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.1
+    force:
+      key: force
+      id: 1
+      epsilon: 0.045
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.2
+attr_training_subset: null
+attr_test_subset: null
+encoder_cfg: null
+reward_func:
+  expr_id: reward-func-manipulator-lifting_20220919_021319
+  encoder_path: null
+  n_negative_training: 100
+  n_negative_test: 100
+  two_direction: true
+  reward_clip: 20
+  state_dim: 80
+  attr_dim: 2
+  hidden_dim: 512
+  anchor_hidden_dim: 128
+  anchor_emb_dim: 64
+  batch_size: 128
+  eval_batch_size: 128
+  n_epoch: 12
+  sampling_strategy: uniform
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  online_training_sampling_strategy: uniform
+  encoded_attributes:
+    hardness:
+      key: hardness
+      id: 0
+      epsilon: 0.055
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.1
+    force:
+      key: force
+      id: 1
+      epsilon: 0.045
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.2

@@ -1,0 +1,23 @@
+# attr information of the domain (for training/evaluation)
+attr_info:
+  use_global_ranking: True
+  is_video_data: False
+  attributes:
+    hardness:
+      key: 'hardness'  # the key for fetching related info in traj_meta
+      language_descriptions: ['Instability of movement']
+      id: 0
+      epsilon: 0.055
+      reverse: False
+      local_change_range:   # used by method 2
+        lower: 0.99
+        upper: 1.1
+    force:
+      key: 'force'
+      language_descriptions: ['The force to be exerted by the character']
+      id: 1
+      epsilon: 0.045
+      reverse: False
+      local_change_range:   # used by method 2
+        lower: 0.99
+        upper: 1.2

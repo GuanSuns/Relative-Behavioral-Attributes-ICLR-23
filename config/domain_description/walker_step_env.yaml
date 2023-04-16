@@ -1,0 +1,23 @@
+# attr information of the domain (for training/evaluation)
+attr_info:
+  use_global_ranking: True
+  is_video_data: False
+  attributes:
+    step_size:
+      key: 'final_step_size'  # the key for fetching related info in traj_meta
+      language_descriptions: ['the step size']
+      id: 0
+      epsilon: 0.1
+      reverse: False
+      local_change_range: # used by method 2
+        lower: 1.0
+        upper: 1.1
+    softness:
+      key: 'softness_speed'
+      language_descriptions: ['softness of the movement']
+      id: 1
+      epsilon: 0.015
+      reverse: True
+      local_change_range: # used by method 2
+        lower: 1.0
+        upper: 1.1

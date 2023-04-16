@@ -1,0 +1,105 @@
+seed: 768
+dataset_name: manipulator-lifting
+dataset_dir: data/behavior_data/manipulator_lifting/
+is_video_data: false
+frame_stack: 3
+image_size: 64
+use_language_attr: true
+domain_description_file: config/domain_description/manipulator_lifting_env.yaml
+attr_info:
+  use_global_ranking: true
+  is_video_data: false
+  attributes:
+    hardness:
+      key: hardness
+      language_descriptions:
+      - Instability of movement
+      id: 0
+      epsilon: 0.055
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.1
+    force:
+      key: force
+      language_descriptions:
+      - The force to be exerted by the character
+      id: 1
+      epsilon: 0.045
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.2
+attr_training_subset: null
+attr_test_subset: null
+encoder_cfg: null
+attr_func:
+  expr_id: language-attr-func-manipulator-lifting_20220926_165209
+  encoder_path: null
+  n_ensemble: 1
+  reward_clip: 20
+  state_dim: 80
+  attr_dim: 768
+  hidden_dim: 1024
+  is_global_ranking: true
+  batch_size: 128
+  eval_batch_size: 128
+  n_epoch: 5
+  sampling_strategy: uniform
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  encoded_attributes:
+    hardness:
+      max: 20.0
+      min: -10.699923515319824
+      ground_min: 0.0
+      ground_max: 0.8999999999999999
+      key: hardness
+      language_descriptions:
+      - Instability of movement
+      id: 0
+      epsilon: 0.055
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.1
+    force:
+      max: 19.348026275634766
+      min: -20.0
+      ground_min: 0.35
+      ground_max: 0.9500000000000001
+      key: force
+      language_descriptions:
+      - The force to be exerted by the character
+      id: 1
+      epsilon: 0.045
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.2
+reward_func:
+  expr_id: null
+  attr_func_path: trained_models/manipulator_lifting/language/method_1/attr_func/
+  n_targets_per_pair: 50
+  n_targets_per_pair_eval: 2
+  n_epoch: 3
+  batch_size: 512
+  eval_batch_size: 512
+  reward_clip: 20
+  state_dim: 80
+  attr_dim: 768
+  hidden_dim: 1024
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5

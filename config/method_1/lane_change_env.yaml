@@ -1,0 +1,98 @@
+seed: null
+dataset_name: 'lane-change'
+dataset_dir: 'data/behavior_data/lane_change/'
+is_video_data: True   # whether the dataset is an image/video dataset
+frame_stack: 3
+image_size: 64
+
+# domain description
+domain_description_file: config/domain_description/lane_change_env.yaml
+
+# the information will be populated automatically
+attr_info: null
+
+# if needed, only use subsets of the training/test data
+attr_training_subset: null
+attr_test_subset: null
+
+# config of encoder training
+encoder_cfg:
+  expr_id: null
+  encoder_type: 'vae'
+  lr: 1e-4
+  loss_recon: 'L2'  # L2 loss or L1 loss
+  batch_size: 128      # training batch size
+  eval_batch_size: 512    # batch size for evaluation
+  n_epoch: 150    # num of training epochs
+  cnn_output_dim: 512  # dim of cnn features, default: 512
+  hidden_dim: 512   # hidden dim of MLP to output z
+  z_dim: 128   # dim of the latent code
+  weight_decay: 1e-5
+  weight_z: 0.1  # weight of kl_z loss
+  sche: 'cosine'
+  # config of cosine scheduler
+  cosine_sche:
+    min_lr: 1e-5
+  # config of Step scheduler
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+
+# config of attribute function training
+attr_func:
+  expr_id: null
+  # the path to a pretrained state encoder
+  encoder_path: 'trained_models/lane_change/vae_encoder/'
+  n_ensemble: 1
+  reward_clip: 20
+  state_dim: 128
+  attr_dim: 2
+  hidden_dim: 512
+
+  is_global_ranking: True
+  batch_size: 128      # training batch size
+  eval_batch_size: 128    # batch size for evaluation
+  n_epoch: 3    # num of training epochs
+  sampling_strategy: 'uniform'  # only support uniform selection for now
+  weight_decay: 1e-5
+  lr: 1e-4
+  sche: 'cosine'
+  # config of cosine scheduler
+  cosine_sche:
+    min_lr: 1e-5
+  # config of Step scheduler
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  # encoded attribute information (a dictionary, this will be populated automatically when the attr function is learned)
+  encoded_attributes: null
+
+# config of the attr-conditioned reward function
+reward_func:
+  expr_id: null
+  # the path to a learned attr function
+  attr_func_path: 'trained_models/lane_change/method_1/attr_func/'
+  n_targets_per_pair: 50   # see the Traj_Pref_Data class
+  n_targets_per_pair_eval: 2
+
+  n_epoch: 3    # num of training epochs
+  batch_size: 512      # training batch size
+  eval_batch_size: 512    # batch size for evaluation
+
+  reward_clip: 20
+  state_dim: 128
+  attr_dim: 2
+  hidden_dim: 512
+  weight_decay: 1e-5
+  lr: 1e-4
+  sche: 'cosine'
+  # config of cosine scheduler
+  cosine_sche:
+    min_lr: 1e-5
+  # config of Step scheduler
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+
+
+

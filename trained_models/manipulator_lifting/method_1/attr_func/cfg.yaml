@@ -1,0 +1,96 @@
+seed: 166
+dataset_name: manipulator-lifting
+dataset_dir: data/behavior_data/manipulator_lifting/
+is_video_data: false
+frame_stack: 3
+image_size: 64
+domain_description_file: config/domain_description/manipulator_lifting_env.yaml
+attr_info:
+  use_global_ranking: true
+  is_video_data: false
+  attributes:
+    hardness:
+      key: hardness
+      id: 0
+      epsilon: 0.055
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.1
+    force:
+      key: force
+      id: 1
+      epsilon: 0.045
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.2
+attr_training_subset: null
+attr_test_subset: null
+encoder_cfg: null
+attr_func:
+  expr_id: attr-func-manipulator-lifting_20220919_005542
+  encoder_path: null
+  n_ensemble: 1
+  reward_clip: 20
+  state_dim: 80
+  attr_dim: 2
+  hidden_dim: 512
+  is_global_ranking: true
+  batch_size: 128
+  eval_batch_size: 128
+  n_epoch: 4
+  sampling_strategy: uniform
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
+  encoded_attributes:
+    hardness:
+      max: 20.0
+      min: 2.3258304595947266
+      ground_min: 0.0
+      ground_max: 0.8999999999999999
+      key: hardness
+      id: 0
+      epsilon: 0.055
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.1
+    force:
+      max: 2.97650146484375
+      min: -20.0
+      ground_min: 0.35
+      ground_max: 0.9500000000000001
+      key: force
+      id: 1
+      epsilon: 0.045
+      reverse: false
+      local_change_range:
+        lower: 0.99
+        upper: 1.2
+reward_func:
+  expr_id: null
+  attr_func_path: trained_models/manipulator_lifting/method_1/attr_func/
+  n_targets_per_pair: 50
+  n_targets_per_pair_eval: 2
+  n_epoch: 3
+  batch_size: 128
+  eval_batch_size: 128
+  reward_clip: 20
+  state_dim: 80
+  attr_dim: 2
+  hidden_dim: 512
+  weight_decay: 1.0e-05
+  lr: 0.0001
+  sche: cosine
+  cosine_sche:
+    min_lr: 1.0e-05
+  step_sche:
+    step_size: 20
+    gamma: 0.5
