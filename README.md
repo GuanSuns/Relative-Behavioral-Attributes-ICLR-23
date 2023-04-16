@@ -30,13 +30,13 @@
   
 
 
-### Step 2. Learning the image-state encoder (only for Lane-Change)
+### Step 2. Learning an image-state encoder (only for Lane-Change)
 - Example script: `scripts/lane_change/vae_encoder.bash`.
 - In the cfg file (see the `vae_encoder.bash` file for example), you will need to set the path to the behavior dataset `dataset_dir: xxxxx`.
 
 
 
-### Step 3. Learning the attribute reward function
+### Step 3. Learning an attribute reward function
 - All the training scripts can be found under the `scripts` directory.
 - **RBA-Global (Method 1)**
   - The first step is to learn an attribute function. For example, when language embedding is used as attribute representation, to learn the attribute function for Lane-Change, the script to use should be `scripts/lane_change/language/method_1_attr.bash`.
